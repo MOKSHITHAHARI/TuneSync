@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube to Spotify Playlist Converter",
+  "version": "1.0",
+  "description": "Convert YouTube playlists and mixes to Spotify playlists",
+  "permissions": ["activeTab", "storage", "identity"],
+  "host_permissions": ["https://*.youtube.com/*", "https://api.spotify.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "oauth2": {
+    "client_id": "__CLIENT_ID__",
+    "scopes": [
+      "playlist-modify-private",
+      "playlist-modify-public",
+      "user-read-private"
+    ],
+    "redirect_uri": "https://enepfhnbdecffpanlbleioemneifiadh.chromiumapp.org/oauth2"
+  }
+}
